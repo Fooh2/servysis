@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff; }
+  * { box-sizing: border-box; }
+  a { color: #1a1a1a; text-decoration: none; }
+  a:hover { color: #b30000; }
+  @keyframes mtIn { from { opacity: 0; transform: translate(-50%, -6px) scale(0.97); } to { opacity: 1; transform: translate(-50%, 0) scale(1); } }
+  @keyframes mtFade { from { opacity: 0; } to { opacity: 1; } }
+</style>
+</helmet>
+
+<div style="font-family: 'Montserrat', Helvetica, sans-serif; color: #1a1a1a; background: #ffffff;">
+
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid #ececec;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="./Servysis Landing.dc.html" style="display: flex; align-items: center; flex: 0 0 auto;">
+        <img src="https://www.servysis.com/wp-content/uploads/2020/11/preferente-positivo.png" alt="Servicios y Sistemas S.A." style="height: 50px; width: auto; display: block;" />
+      </a>
+      <nav style="display: flex; align-items: center; gap: 4px;">
+        <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; gap: 2px;">
+            <a href="./Servysis Landing.dc.html" style="padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;" style-hover="background: #f4f4f4;">Home</a>
+            <a href="./Marca Template.dc.html" style="padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;" style-hover="background: #f4f4f4;">Productos</a>
+            <div style="position: relative;" onMouseEnter="{{ enterServicios }}" onMouseLeave="{{ leaveMenu }}">
+              <a href="./Pagina de Servicio.dc.html" style="display: flex; align-items: center; gap: 7px; padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;" style-hover="background: #f4f4f4;">Servicios<span style="display: block; width: 5px; height: 5px; border-right: 1.5px solid #9a9a9a; border-bottom: 1.5px solid #9a9a9a; transform: {{ chevronServicios }}; transition: transform 0.2s ease;"></span></a>
+              <sc-if value="{{ showServicios }}" hint-placeholder-val="{{ false }}">
+                <div style="position: absolute; top: calc(100% + 12px); left: 50%; transform: translateX(-50%); width: 300px; background: #ffffff; border: 1px solid #f0f0f0; border-radius: 16px; box-shadow: 0 24px 60px -14px rgba(20,20,20,0.3), 0 6px 16px -6px rgba(20,20,20,0.12); padding: 10px; transform-origin: top center; animation: mtIn 0.18s cubic-bezier(0.2,0.8,0.2,1) both;">
+                  <sc-for list="{{ servicios }}" as="item" hint-placeholder-count="5">
+                    <a href="./Pagina de Servicio.dc.html" style="display: block; padding: 11px 12px; border-radius: 10px; font-size: 13.5px; font-weight: 600;" style-hover="background: #f6f6f6;">{{ item.name }}</a>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+            <a href="./Pagina de Solucion.dc.html" style="padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;" style-hover="background: #f4f4f4;">Soluciones</a>
+          </div>
+          <a href="{{ mailto }}" style="margin-left: 14px; padding: 12px 24px; border-radius: 999px; background: #ffc107; color: #1a1a1a; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;" style-hover="background: #ffb300;">Contactar</a>
+        </sc-if>
+        
+        <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ toggleMobile }}" aria-label="Menú" style="display: flex; flex-direction: column; justify-content: center; gap: 5px; width: 46px; height: 46px; padding: 0 11px; border: 1px solid #e6e6e6; border-radius: 12px; background: #ffffff; cursor: pointer;">
+            <span style="display: block; height: 2px; background: #1a1a1a; border-radius: 2px;"></span>
+            <span style="display: block; height: 2px; background: #1a1a1a; border-radius: 2px;"></span>
+            <span style="display: block; height: 2px; background: #1a1a1a; border-radius: 2px;"></span>
+          </button>
+        </sc-if>
+      </nav>
+    </div>
+    <sc-if value="{{ showMobilePanel }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; left: 0; right: 0; top: 100%; border-top: 1px solid #ececec; background: #ffffff; padding: 12px 20px 22px; z-index: 40; box-shadow: 0 12px 24px rgba(0,0,0,0.1);">
+        <sc-for list="{{ mobileNav }}" as="item" hint-placeholder-count="4">
+          <a href="{{ item.href }}" style="display: block; padding: 15px 6px; font-size: 16px; font-weight: 600; border-bottom: 1px solid #f2f2f2;">{{ item.name }}</a>
+        </sc-for>
+        <a href="{{ mailto }}" style="display: block; margin-top: 18px; padding: 16px; border-radius: 12px; background: #ffc107; color: #1a1a1a; text-align: center; font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;">Contactar</a>
+      </div>
+    </sc-if>
+  </header>
+
+  <section style="position: relative; aspect-ratio: 16 / 7; overflow: hidden;">
+    <sc-for list="{{ slides }}" as="slide" hint-placeholder-count="3">
+      <div style="{{ slide.wrapperStyle }}">
+        <sc-if value="{{ slide.hasImg }}" hint-placeholder-val="{{ false }}">
+          <img src="{{ slide.img }}" alt="{{ slide.title }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;" />
+        </sc-if>
+        <sc-if value="{{ slide.isPlaceholder }}" hint-placeholder-val="{{ false }}">
+          <div style="position: absolute; inset: 0; background: repeating-linear-gradient(135deg, #2a2a2a 0 14px, #1f1f1f 14px 28px); display: flex; align-items: flex-end; justify-content: flex-end; padding: 18px;">
+            <span style="font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: rgba(255,255,255,0.55); letter-spacing: 0.05em;">[ foto de {{ brandName }} ]</span>
+          </div>
+        </sc-if>
+        <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 46%; min-width: 320px; background: linear-gradient(90deg, rgba(255,255,255,0.94) 62%, rgba(255,255,255,0) 100%); display: flex; align-items: center; padding: 0 6% 0 4%;">
+          <div>
+            <span style="display: block; font-size: 16px; font-weight: 600; letter-spacing: 0.04em; color: #4a4a4a;">{{ slide.kicker }}</span>
+            <h1 style="margin: 8px 0 0; font-size: 42px; line-height: 1.1; font-weight: 400; letter-spacing: 0.01em; color: #1a1a1a; text-wrap: pretty;">{{ slide.title }}</h1>
+            <a href="{{ mailto }}" style="display: inline-block; margin-top: 26px; padding: 13px 26px; border-radius: 999px; background: #b30000; color: #ffffff; font-size: 13px; font-weight: 600;" style-hover="background: #990000; color: #ffffff;">Más información</a>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+    <div style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 5;">
+      <sc-for list="{{ dots }}" as="d" hint-placeholder-count="3">
+        <span onClick="{{ d.goTo }}" style="width: {{ d.size }}; height: 7px; border-radius: 999px; background: {{ d.color }}; cursor: pointer; transition: all 0.25s ease;"></span>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="background: #f0f1f2;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 34px 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px;">
+      <sc-for list="{{ quickLinks }}" as="item" hint-placeholder-count="4">
+        <a href="./Marca Template.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 30px 16px; border-radius: 12px; background: #ffffff; text-align: center; transition: box-shadow 0.2s ease, transform 0.2s ease;" style-hover="box-shadow: 0 16px 34px -18px rgba(20,20,20,0.28); transform: translateY(-3px);">
+          <span style="width: 44px; height: 44px; border-radius: 999px; background: #fbeaea; display: flex; align-items: center; justify-content: center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="{{ item.iconPath }}" stroke="#b30000" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span style="font-size: 13.5px; font-weight: 600; color: #b30000;">{{ item.name }}</span>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="background: #f0f1f2; border-top: 1px solid #e4e5e6;">
+    <div style="max-width: 1080px; margin: 0 auto; padding: 70px 24px 80px; text-align: center;">
+      <h2 style="margin: 0 0 50px; font-size: 32px; font-weight: 500; color: #3a3a3a;">{{ brandName }}</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 46px; text-align: center;">
+        <sc-for list="{{ valueProps }}" as="item" hint-placeholder-count="3">
+          <div>
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" style="margin: 0 auto 18px; display: block;">
+              <circle cx="12" cy="12" r="10" stroke="#b30000" stroke-width="1.6"></circle>
+              <path d="{{ item.iconPath }}" stroke="#b30000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            <span style="display: block; font-size: 14.5px; font-weight: 700; letter-spacing: 0.03em; color: #1a1a1a; text-transform: uppercase;">{{ item.title }}</span>
+            <p style="margin: 14px 0 0; font-size: 13.5px; line-height: 1.7; color: #6a6a6a; font-weight: 300;">{{ item.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1200px; margin: 0 auto; padding: 80px 24px 90px;">
+    <h2 style="margin: 0 0 46px; text-align: center; font-size: 30px; font-weight: 500; color: #3a3a3a; letter-spacing: 0.02em;">PRODUCTOS DESTACADOS</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px 28px;">
+      <sc-for list="{{ products }}" as="item" hint-placeholder-count="6">
+        <div style="text-align: center;">
+          <div style="aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; margin-bottom: 18px;">
+            <img src="{{ item.img }}" alt="{{ item.name }}" style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+          <span style="display: block; font-size: 15px; font-weight: 600; color: #2a2a2a;">{{ item.name }}</span>
+          <a href="./Marca Template.dc.html" style="display: inline-block; margin-top: 14px; padding: 11px 26px; border-radius: 999px; background: #b30000; color: #ffffff; font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em;" style-hover="background: #990000; color: #ffffff;">Leer más</a>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <footer style="background: #1a1a1a; color: rgba(255,255,255,0.68);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 50px 24px 26px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px;">
+      <div>
+        <img src="https://www.servysis.com/wp-content/uploads/2020/11/preferente-positivo.png" alt="Servicios y Sistemas S.A." style="height: 40px; width: auto; display: block; filter: brightness(0) invert(1);" />
+        <p style="margin: 18px 0 0; font-size: 13px; line-height: 1.7; font-weight: 300; max-width: 300px;">Nos esforzamos y trabajamos en busca de la satisfacción total de nuestros clientes, adecuando cada solución a la medida de su negocio.</p>
+      </div>
+      <div>
+        <span style="display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #ffc107;">Contacto</span>
+        <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; font-weight: 300;">
+          <span>Juan Pablo Gorostiaga N°981 B°Ytay — Asunción, Paraguay</span>
+          <a href="tel:+59521681514" style="color: rgba(255,255,255,0.68);">595 21 681514</a>
+          <a href="{{ mailto }}" style="color: rgba(255,255,255,0.68);">servysis@servysis.com</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding: 18px 24px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; font-size: 12px; color: rgba(255,255,255,0.4);">
+      <span>© 2026 Servicios y Sistemas S.A.</span>
+      <span>· Desarrollado por <a href="https://dotik.com.py" target="_blank" rel="noopener" style="color: #ffc107; font-weight: 600;" style-hover="color: #ffffff;">Dotik</a></span>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;brandName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Linde Material Handling&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;heroKicker&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;H50 - H80 EVO&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;heroTitle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;AUTOELEVADOR A COMBUSTIÓN&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;heroImg&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;https://www.servysis.com/wp-content/uploads/2021/07/E12-E20-EVO-450x338.jpg&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;slides&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{kicker:string,title:string,img:string,isPlaceholder?:boolean}[]&quot;},&quot;quickLinks&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{name:string,iconPath:string}[]&quot;},&quot;valueProps&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{title:string,text:string,iconPath:string}[]&quot;},&quot;products&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;{name:string}[]&quot;},&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:1500}}">
+class Component extends DCLogic {
+  state = { menu: null, slideIndex: 0, mobileOpen: false, narrow: false };
+
+  componentDidMount() {
+    this._timer = setInterval(() => {
+      const n = this.slidesData().length;
+      this.setState(s => ({ slideIndex: (s.slideIndex + 1) % n }));
+    }, 5000);
+    this._fit = () => {
+      const narrow = window.innerWidth < 900;
+      if (narrow !== this.state.narrow) this.setState({ narrow, mobileOpen: false });
+    };
+    this._fit();
+    window.addEventListener('resize', this._fit);
+    this.setupMotion();
+  }
+  componentWillUnmount() {
+    clearInterval(this._timer);
+    window.removeEventListener('resize', this._fit);
+    document.removeEventListener('pointerdown', this._press, true);
+    if (this._io) this._io.disconnect();
+  }
+
+  setupMotion() {
+    const secs = Array.from(document.querySelectorAll('section')).slice(1);
+    secs.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.75s cubic-bezier(0.2,0.8,0.2,1), transform 0.75s cubic-bezier(0.2,0.8,0.2,1)';
+    });
+    const show = el => { el.style.opacity = '1'; el.style.transform = 'none'; };
+    this._io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { show(en.target); this._io.unobserve(en.target); } });
+    }, { threshold: 0.05, rootMargin: '0px 0px -6% 0px' });
+    secs.forEach(el => this._io.observe(el));
+    setTimeout(() => secs.forEach(show), 3000);
+
+    this._press = e => {
+      const t = e.target.closest && e.target.closest('a, button');
+      if (!t) return;
+      if (navigator.vibrate) navigator.vibrate(8);
+      t.style.transition = 'transform 0.12s ease';
+      t.style.transform = 'scale(0.97)';
+      const up = () => { t.style.transform = ''; window.removeEventListener('pointerup', up); window.removeEventListener('pointercancel', up); };
+      window.addEventListener('pointerup', up);
+      window.addEventListener('pointercancel', up);
+    };
+    document.addEventListener('pointerdown', this._press, true);
+  }
+
+  slidesData() {
+    const p = this.props;
+    return p.slides ?? [
+      { kicker: p.heroKicker ?? 'H50 - H80 EVO', title: p.heroTitle ?? 'AUTOELEVADOR A COMBUSTIÓN', img: p.heroImg || 'https://www.servysis.com/wp-content/uploads/2021/07/E12-E20-EVO-450x338.jpg' },
+      { kicker: 'SERIE E', title: 'MONTACARGAS ELÉCTRICOS DE ALTO RENDIMIENTO', img: 'https://images.unsplash.com/photo-1586528116311-ad8ed7c663c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' },
+      { kicker: 'INTRALOGÍSTICA', title: 'SOLUCIONES INTEGRALES PARA SU ALMACÉN', img: 'https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80' }
+    ];
+  }
+
+  renderVals() {
+    const p = this.props;
+    const slides = this.slidesData();
+    const active = this.state.slideIndex % slides.length;
+    return {
+      desktop: !this.state.narrow,
+      mobile: this.state.narrow,
+      showMobilePanel: this.state.narrow && this.state.mobileOpen,
+      toggleMobile: () => this.setState(s => ({ mobileOpen: !s.mobileOpen })),
+      mobileNav: [
+        { name: 'Home', href: './Servysis Landing.dc.html' },
+        { name: 'Productos', href: './Marca Template.dc.html' },
+        { name: 'Servicios', href: './Pagina de Servicio.dc.html' },
+        { name: 'Soluciones', href: './Pagina de Solucion.dc.html' }
+      ],
+      mailto: 'mailto:servysis@servysis.com?subject=Consulta%20-%20' + encodeURIComponent(p.brandName || 'Servicios y Sistemas'),
+      brandName: p.brandName ?? 'Linde Material Handling',
+      slides: slides.map((s, i) => ({
+        ...s,
+        hasImg: !!s.img && !s.isPlaceholder,
+        wrapperStyle: 'position:absolute;inset:0;transition:opacity 0.9s ease;opacity:' + (i === active ? '1' : '0') + ';pointer-events:' + (i === active ? 'auto' : 'none') + ';z-index:' + (i === active ? '1' : '0') + ';'
+      })),
+      dots: slides.map((_, i) => ({
+        color: i === active ? '#b30000' : '#d8d8d8',
+        size: i === active ? '20px' : '7px',
+        goTo: () => this.setState({ slideIndex: i })
+      })),
+      showServicios: this.state.menu === 'servicios',
+      chevronServicios: this.state.menu === 'servicios' ? 'rotate(225deg) translateY(1px)' : 'rotate(45deg) translateY(-1px)',
+      enterServicios: () => this.setState({ menu: 'servicios' }),
+      leaveMenu: () => this.setState({ menu: null }),
+      servicios: [
+        { name: 'Mantenimiento y reparación' }, { name: 'Piezas de recambio originales' },
+        { name: 'Cursos de formación' }, { name: 'Adaptación y accesorios' }, { name: 'Servicios técnicos y de seguridad' }
+      ],
+      quickLinks: p.quickLinks ?? [
+        { name: 'Alquile su montacarga', iconPath: 'M4 12a8 8 0 1 1 3 6.2M4 12v5h5' },
+        { name: 'Encuentre su montacarga', iconPath: 'M11 4a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm9 16l-4.6-4.6' },
+        { name: 'Intralogística', iconPath: 'M12 3l7 4v10l-7 4-7-4V7z M5 7l7 4 7-4 M12 11v10' },
+        { name: 'Servicios Postventa', iconPath: 'M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 0 1 5.4-5.4l-3-3z' }
+      ],
+      valueProps: p.valueProps ?? [
+        { title: 'Productividad', text: 'El rendimiento de las carretillas elevadoras constituye la columna vertebral de una intralogística eficiente.', iconPath: 'M6 15l4-4 3 3 5-6' },
+        { title: 'Seguridad', text: 'La seguridad de las personas, los vehículos y el material constituye la idea central de la filosofía de cero accidentes.', iconPath: 'M9 12l2 2 4-4' },
+        { title: 'Ergonomía', text: 'Las mejores soluciones surgen cuando las personas y la tecnología interactúan en perfecta armonía.', iconPath: 'M8 10a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm8 0a2 2 0 1 1 4 0 2 2 0 0 1-4 0zM6 15h4m4 0h4' }
+      ],
+      products: p.products ?? [
+        { name: 'Transpaleta MT15', img: 'https://images.unsplash.com/photo-1622473590773-f588134b6ce7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+        { name: 'Montacargas E12 – E20 EVO', img: 'https://images.unsplash.com/photo-1586528116311-ad8ed7c663c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+        { name: 'Apiladores retráctiles R14 – R17 X', img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+        { name: 'Apilador L14 – L16 R', img: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+        { name: 'Tractor de arrastre P50', img: 'https://images.unsplash.com/photo-1563122870-6b0b48a0af09?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+        { name: 'Transpaleta CiTi one', img: 'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

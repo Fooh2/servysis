@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  html, body { margin: 0; padding: 0; background: #ffffff; }
+  * { box-sizing: border-box; }
+  a { color: #1a1a1a; text-decoration: none; }
+  a:hover { color: #b30000; }
+</style>
+</helmet>
+
+<div style="font-family: 'Montserrat', Helvetica, sans-serif; color: #1a1a1a; background: #ffffff;">
+
+  <header style="position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid #ececec;">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="./Servysis Landing.dc.html" style="display: flex; align-items: center; flex: 0 0 auto;">
+        <img src="https://www.servysis.com/wp-content/uploads/2020/11/preferente-positivo.png" alt="Servicios y Sistemas S.A." style="height: 50px; width: auto; display: block;" />
+      </a>
+      <nav style="display: flex; align-items: center; gap: 4px;">
+        <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; gap: 2px;">
+            <a href="./Servysis Landing.dc.html" style="padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;" style-hover="background: #f4f4f4;">Home</a>
+            <a href="./Marca Template.dc.html" style="padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;">Productos</a>
+            <a href="./Pagina de Servicio.dc.html" style="padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 500;">Servicios</a>
+            <a href="./Pagina de Solucion.dc.html" style="padding: 10px 16px; border-radius: 999px; font-size: 14px; font-weight: 700; color: #b30000; background: #fbeaea;">Soluciones</a>
+          </div>
+          <a href="{{ mailto }}" style="margin-left: 14px; padding: 12px 24px; border-radius: 999px; background: #ffc107; color: #1a1a1a; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;" style-hover="background: #ffb300;">Contactar</a>
+        </sc-if>
+        
+        <sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ toggleMobile }}" aria-label="Menú" style="display: flex; flex-direction: column; justify-content: center; gap: 5px; width: 46px; height: 46px; padding: 0 11px; border: 1px solid #e6e6e6; border-radius: 12px; background: #ffffff; cursor: pointer;">
+            <span style="display: block; height: 2px; background: #1a1a1a; border-radius: 2px;"></span>
+            <span style="display: block; height: 2px; background: #1a1a1a; border-radius: 2px;"></span>
+            <span style="display: block; height: 2px; background: #1a1a1a; border-radius: 2px;"></span>
+          </button>
+        </sc-if>
+      </nav>
+    </div>
+    <sc-if value="{{ showMobilePanel }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; left: 0; right: 0; top: 100%; border-top: 1px solid #ececec; background: #ffffff; padding: 12px 20px 22px; z-index: 40; box-shadow: 0 12px 24px rgba(0,0,0,0.1);">
+        <sc-for list="{{ mobileNav }}" as="item" hint-placeholder-count="4">
+          <a href="{{ item.href }}" style="display: block; padding: 15px 6px; font-size: 16px; font-weight: 600; border-bottom: 1px solid #f2f2f2;">{{ item.name }}</a>
+        </sc-for>
+        <a href="{{ mailto }}" style="display: block; margin-top: 18px; padding: 16px; border-radius: 12px; background: #ffc107; color: #1a1a1a; text-align: center; font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;">Contactar</a>
+      </div>
+    </sc-if>
+  </header>
+
+  <section style="position: relative; aspect-ratio: 21 / 8; overflow: hidden;">
+    <img src="{{ heroImg }}" alt="{{ heroTitle }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;" />
+    <div style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(26,26,26,0.72) 0%, rgba(26,26,26,0.15) 55%, rgba(26,26,26,0) 100%);"></div>
+    <div style="position: absolute; inset: 0; display: flex; align-items: center; padding: 0 6%;">
+      <div style="max-width: 560px;">
+        <span style="display: block; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #ffc107;">{{ kicker }}</span>
+        <h1 style="margin: 12px 0 0; font-size: 38px; line-height: 1.18; font-weight: 600; color: #ffffff; letter-spacing: -0.01em; text-wrap: pretty;">{{ heroTitle }}</h1>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 880px; margin: 0 auto; padding: 64px 24px 10px;">
+    <p style="margin: 0; font-size: 15.5px; line-height: 1.85; color: #5e5e5e; font-weight: 300; text-align: center; text-wrap: pretty;">{{ intro }}</p>
+  </section>
+
+  <sc-for list="{{ blocks }}" as="blk" hint-placeholder-count="6">
+    <sc-if value="{{ blk.isImageText }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width: 1160px; margin: 0 auto; padding: 60px 24px;">
+        <div style="display: grid; grid-template-columns: {{ blk.gridTemplate }}; gap: 46px; align-items: center;">
+          <sc-if value="{{ blk.imageLeft }}" hint-placeholder-val="{{ false }}">
+            <div style="border-radius: 12px; overflow: hidden; aspect-ratio: 4 / 3;"><img src="{{ blk.image }}" alt="{{ blk.title }}" style="width: 100%; height: 100%; object-fit: cover; display: block;" /></div>
+          </sc-if>
+          <div>
+            <h3 style="margin: 0; font-size: 21px; font-weight: 600; text-wrap: pretty;">{{ blk.title }}</h3>
+            <p style="margin: 14px 0 0; font-size: 14.5px; line-height: 1.8; color: #5e5e5e; font-weight: 300; text-wrap: pretty;">{{ blk.body }}</p>
+          </div>
+          <sc-if value="{{ blk.imageRight }}" hint-placeholder-val="{{ false }}">
+            <div style="border-radius: 12px; overflow: hidden; aspect-ratio: 4 / 3;"><img src="{{ blk.image }}" alt="{{ blk.title }}" style="width: 100%; height: 100%; object-fit: cover; display: block;" /></div>
+          </sc-if>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ blk.isImageOverlay }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width: 1160px; margin: 60px auto; padding: 0 24px;">
+        <div style="position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 21 / 9;">
+          <img src="{{ blk.image }}" alt="{{ blk.title }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;" />
+          <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 24px;">
+            <div style="background: rgba(255,255,255,0.94); border-radius: 12px; padding: 30px 36px; max-width: 460px; text-align: center;">
+              <h3 style="margin: 0; font-size: 20px; font-weight: 600;">{{ blk.title }}</h3>
+              <p style="margin: 12px 0 0; font-size: 13.5px; line-height: 1.7; color: #5e5e5e; font-weight: 300;">{{ blk.body }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ blk.isColorBand }}" hint-placeholder-val="{{ false }}">
+      <section style="background: {{ blk.bg }}; color: {{ blk.fg }}; padding: 64px 0;">
+        <div style="max-width: 1160px; margin: 0 auto; padding: 0 24px;">
+          <sc-if value="{{ blk.title }}" hint-placeholder-val="{{ '' }}">
+            <h2 style="margin: 0 0 36px; text-align: center; font-size: 28px; font-weight: 600;">{{ blk.title }}</h2>
+          </sc-if>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 40px;">
+            <sc-for list="{{ blk.cols }}" as="col" hint-placeholder-count="2">
+              <div>
+                <sc-if value="{{ col.title }}" hint-placeholder-val="{{ '' }}">
+                  <h4 style="margin: 0 0 14px; font-size: 16.5px; font-weight: 600;">{{ col.title }}</h4>
+                </sc-if>
+                <sc-if value="{{ col.body }}" hint-placeholder-val="{{ '' }}">
+                  <p style="margin: 0 0 12px; font-size: 13.5px; line-height: 1.7; opacity: 0.85; font-weight: 300;">{{ col.body }}</p>
+                </sc-if>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <sc-for list="{{ col.bullets }}" as="b" hint-placeholder-count="3">
+                    <div style="display: flex; gap: 9px; align-items: flex-start; font-size: 13.5px; line-height: 1.55;">
+                      <span style="flex: 0 0 auto; margin-top: 7px; width: 5px; height: 5px; border-radius: 999px; background: currentColor; opacity: 0.7;"></span>
+                      <span>{{ b.t }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ blk.isGrid }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width: 1160px; margin: 0 auto; padding: 64px 24px;">
+        <sc-if value="{{ blk.title }}" hint-placeholder-val="{{ '' }}">
+          <h2 style="margin: 0 0 40px; text-align: center; font-size: 26px; font-weight: 600;">{{ blk.title }}</h2>
+        </sc-if>
+        <div style="display: grid; grid-template-columns: {{ blk.gridTemplate }}; gap: 32px;">
+          <sc-for list="{{ blk.items }}" as="item" hint-placeholder-count="4">
+            <div>
+              <span style="display: block; width: 26px; height: 3px; background: #ffc107; border-radius: 2px; margin-bottom: 14px;"></span>
+              <h4 style="margin: 0; font-size: 13.5px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;">{{ item.title }}</h4>
+              <p style="margin: 10px 0 0; font-size: 13px; line-height: 1.7; color: #767676; font-weight: 300;">{{ item.text }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ blk.isProductGrid }}" hint-placeholder-val="{{ false }}">
+      <section style="max-width: 1160px; margin: 0 auto; padding: 64px 24px;">
+        <h2 style="margin: 0 0 40px; text-align: center; font-size: 26px; font-weight: 600;">{{ blk.title }}</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 36px 24px;">
+          <sc-for list="{{ blk.items }}" as="item" hint-placeholder-count="6">
+            <div style="text-align: center;">
+              <div style="aspect-ratio: 1 / 1; border-radius: 10px; overflow: hidden; margin-bottom: 14px;">
+                <img src="{{ item.img }}" alt="{{ item.title }}" style="width: 100%; height: 100%; object-fit: cover;" />
+              </div>
+              <span style="display: block; font-size: 14px; font-weight: 600;">{{ item.title }}</span>
+              <a href="./Marca Template.dc.html" style="display: inline-block; margin-top: 12px; padding: 10px 22px; border-radius: 999px; background: #b30000; color: #ffffff; font-size: 12px; font-weight: 700;" style-hover="background: #990000; color: #ffffff;">Leer más</a>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ blk.isCta }}" hint-placeholder-val="{{ false }}">
+      <section style="background: #b30000; color: #ffffff; padding: 60px 24px; text-align: center;">
+        <h2 style="margin: 0; font-size: 24px; font-weight: 600;">{{ blk.title }}</h2>
+        <p style="margin: 14px auto 0; max-width: 640px; font-size: 14.5px; line-height: 1.7; font-weight: 300; opacity: 0.92;">{{ blk.body }}</p>
+        <a href="{{ mailto }}" style="display: inline-block; margin-top: 24px; padding: 14px 30px; border-radius: 999px; background: #ffffff; color: #b30000; font-size: 13px; font-weight: 700; letter-spacing: 0.04em;" style-hover="background: #f4f4f4; color: #b30000;">{{ blk.button }}</a>
+      </section>
+    </sc-if>
+  </sc-for>
+
+  <footer style="background: #1a1a1a; color: rgba(255,255,255,0.68);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 50px 24px 26px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px;">
+      <div>
+        <img src="https://www.servysis.com/wp-content/uploads/2020/11/preferente-positivo.png" alt="Servicios y Sistemas S.A." style="height: 40px; width: auto; display: block; filter: brightness(0) invert(1);" />
+        <p style="margin: 18px 0 0; font-size: 13px; line-height: 1.7; font-weight: 300; max-width: 300px;">Nos esforzamos y trabajamos en busca de la satisfacción total de nuestros clientes, adecuando cada solución a la medida de su negocio.</p>
+      </div>
+      <div>
+        <span style="display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #ffc107;">Contacto</span>
+        <div style="margin-top: 16px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; font-weight: 300;">
+          <span>Juan Pablo Gorostiaga N°981 B°Ytay — Asunción, Paraguay</span>
+          <a href="tel:+59521681514" style="color: rgba(255,255,255,0.68);">595 21 681514</a>
+          <a href="{{ mailto }}" style="color: rgba(255,255,255,0.68);">servysis@servysis.com</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding: 18px 24px; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; font-size: 12px; color: rgba(255,255,255,0.4);">
+      <span>© 2026 Servicios y Sistemas S.A.</span>
+      <span>· Desarrollado por <a href="https://dotik.com.py" target="_blank" rel="noopener" style="color: #ffc107; font-weight: 600;" style-hover="color: #ffffff;">Dotik</a></span>
+    </div>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;kicker&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Automatización&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;heroTitle&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Automatización flexible para la intralogística&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;heroImg&quot;:{&quot;editor&quot;:null,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;intro&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;blocks&quot;:{&quot;editor&quot;:null,&quot;default&quot;:null,&quot;tsType&quot;:&quot;object[]&quot;},&quot;$preview&quot;:{&quot;width&quot;:1200,&quot;height&quot;:2000}}">
+  state = { mobileOpen: false, narrow: false };
+
+  componentDidMount() {
+    this._fit = () => {
+      const narrow = window.innerWidth < 900;
+      if (narrow !== this.state.narrow) this.setState({ narrow, mobileOpen: false });
+    };
+    this._fit();
+    window.addEventListener('resize', this._fit);
+    this.setupMotion();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._fit);
+    document.removeEventListener('pointerdown', this._press, true);
+    if (this._io) this._io.disconnect();
+  }
+
+  setupMotion() {
+    const secs = Array.from(document.querySelectorAll('section')).slice(1);
+    secs.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.75s cubic-bezier(0.2,0.8,0.2,1), transform 0.75s cubic-bezier(0.2,0.8,0.2,1)';
+    });
+    const show = el => { el.style.opacity = '1'; el.style.transform = 'none'; };
+    this._io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { show(en.target); this._io.unobserve(en.target); } });
+    }, { threshold: 0.05, rootMargin: '0px 0px -6% 0px' });
+    secs.forEach(el => this._io.observe(el));
+    setTimeout(() => secs.forEach(show), 3000);
+
+    this._press = e => {
+      const t = e.target.closest && e.target.closest('a, button');
+      if (!t) return;
+      if (navigator.vibrate) navigator.vibrate(8);
+      t.style.transition = 'transform 0.12s ease';
+      t.style.transform = 'scale(0.97)';
+      const up = () => { t.style.transform = ''; window.removeEventListener('pointerup', up); window.removeEventListener('pointercancel', up); };
+      window.addEventListener('pointerup', up);
+      window.addEventListener('pointercancel', up);
+    };
+    document.addEventListener('pointerdown', this._press, true);
+  }
+
+  renderVals() {
+    const p = this.props;
+    const rawBlocks = p.blocks ?? [
+      { type: 'imageText', title: 'Automatización inteligente con Linde', body: 'Sobre la base de una amplia gama de vehículos y una tecnología de navegación que no requiere infraestructuras instaladas de forma fija, Linde ofrece soluciones de automatización que se adaptan a los requisitos específicos, incluso para pequeñas empresas.', image: 'https://www.servysis.com/wp-content/uploads/elementor/thumbs/STILL_Hauptbuehne_Mietfahrzeuge_Einsatz_3840x1400-ozv21ck6m0j8ajv9bvc2hvaqv3lyhfmo846fehlf40.jpg' },
+      { type: 'colorBand', bg: '#fafafa', fg: '#1a1a1a', title: 'LINDE ROBOTICS', cols: [
+        { title: 'Una solución inteligente e integrada', body: 'La tecnología robótica avanzada proporciona al usuario importantes ventajas competitivas, y al mismo tiempo garantiza un alto grado de flexibilidad para los procesos operativos.' },
+        { title: '¿Por qué la robótica?', body: 'Esta nueva generación de equipos de trabajo autónomos ejecuta procesos de manipulación repetitivos de modo ininterrumpido y fiable, incrementando la productividad y reduciendo los costes.' }
+      ]},
+      { type: 'colorBand', bg: '#ffffff', fg: '#1a1a1a', title: 'COMPETITIVIDAD', cols: [
+        { title: 'La solución más rentable', body: 'La base de toda solución robotizada la constituyen los vehículos estándar de la producción de serie de Linde, de eficacia sobradamente acreditada.', bullets: [{ t: 'Menores costes de instalación' }, { t: 'Reducción sustancial de los costes operativos' }, { t: 'Mayor flexibilidad' }] }
+      ]},
+      { type: 'grid', gridTemplate: 'repeat(auto-fit, minmax(220px, 1fr))', items: [
+        { title: 'No requiere infraestructura', text: 'La tecnología de navegación no requiere infraestructuras instaladas de forma fija, dando cabida a la guía a expreso.' },
+        { title: 'Rapidez de instalación', text: 'El sistema detecta estructuras tales como estanterías, paredes o equipos, sin convertirse en un lugar bidireccional en el que hay que definir puntos de acción.' },
+        { title: 'Solución escalable', text: 'La tecnología, desarrollada en colaboración con especialistas en robótica, incorpora todas las funciones de manera fluida.' },
+        { title: 'Integración completa', text: 'El software supervisor controla en todo momento la flota robotizada, además de mantener las tareas para asignar tarjetas.' }
+      ]},
+      { type: 'colorBand', bg: '#b30000', fg: '#ffffff', title: 'Localización en tiempo real', cols: [
+        { body: 'Las carretillas robotizadas utilizan un mapa para determinar su posición en el espacio. A tal fin, comparan en tiempo real el mapa de referencia con las estructuras detectadas en cada momento por el láser de navegación.' }
+      ]},
+      { type: 'colorBand', bg: '#ffffff', fg: '#1a1a1a', title: 'SEGURIDAD Y PRODUCTIVIDAD', cols: [
+        { body: 'Ya sea con cámara o láser, las carretillas robotizadas se mueven en todo momento con seguridad y productividad significativas incluso durante la interacción con personal o vehículos.' }
+      ]},
+      { type: 'productGrid', title: 'GAMA MATIC DE LINDE', items: [
+        { title: 'R-MATIC', img: 'https://images.unsplash.com/photo-1586528116311-ad8ed7c663c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }, 
+        { title: 'K-MATIC', img: 'https://images.unsplash.com/photo-1622473590773-f588134b6ce7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }, 
+        { title: 'Apilador L-MATIC AC', img: 'https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' },
+        { title: 'Vehículo automatizado L-MATIC', img: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2866?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }, 
+        { title: 'Transpaleta automatizada T-MATIC', img: 'https://images.unsplash.com/photo-1563122870-6b0b48a0af09?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }, 
+        { title: 'Tractor eléctrico P-MATIC', img: 'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80' }
+      ]},
+      { type: 'colorBand', bg: '#b30000', fg: '#ffffff', title: null, cols: [
+        { title: 'Cinco ventajas de la geonavegación', bullets: [
+          { t: 'Interconexión en red: interconexión de gran alcance con la red comercial WMS' },
+          { t: 'Seguridad: sencillez en el encaje y las cámaras' },
+          { t: 'Sencillez: no requiere infraestructuras' },
+          { t: 'Flexibilidad: rutas y puntos de referencia adaptables' },
+          { t: 'Transparencia: precisión y productividad optimizadas' }
+        ]}
+      ]},
+      { type: 'imageText', title: 'Navegación automatizada en pasillos estrechos', body: 'Pasillos estrechos, grandes alturas de detección: superficies de almacenamiento poco visibles el concepto de pasillos estrechos resulta rentable para muchas empresas, y por ello también operable.', image: 'https://www.servysis.com/wp-content/uploads/elementor/thumbs/STILL_Hauptbuehne_Mietfahrzeuge_Einsatz_3840x1400-ozv21ck6m0j8ajv9bvc2hvaqv3lyhfmo846fehlf40.jpg', imageRight: true },
+      { type: 'grid', gridTemplate: 'repeat(auto-fit, minmax(220px, 1fr))', title: 'VENTAJAS DE LA NAVEGACIÓN EN PASILLOS ESTRECHOS', items: [
+        { title: 'Eficiencia', text: 'El vehículo se posiciona fluida en la ubicación de estantería más rápida y de la mejor manera posible dentro de cada pasillo, ahorrando el tiempo de manipulación de cargas.' },
+        { title: 'Precisión', text: 'El sistema ayuda al conductor a acertar en la mercancía correcta. El conductor no tiene que salir del vehículo para depositar el palet en la ubicación deseada.' },
+        { title: 'Seguridad', text: 'De seguridad del pasillo instalado de esta tecnología identifica inequívocamente al conductor con puntos exactos marcados de forma fiable, la velocidad, el situ de elevación y su bloqueo de la horquilla.' }
+      ]}
+    ];
+    const blocks = rawBlocks.map(b => ({
+      isImageText: b.type === 'imageText',
+      isImageOverlay: b.type === 'imageOverlay',
+      isColorBand: b.type === 'colorBand',
+      isGrid: b.type === 'grid',
+      isProductGrid: b.type === 'productGrid',
+      isCta: b.type === 'cta',
+      imageLeft: b.type === 'imageText' && !!b.image && !b.imageRight,
+      imageRight: b.type === 'imageText' && !!b.image && !!b.imageRight,
+      gridTemplate: b.gridTemplate || (b.image ? '1fr 1.15fr' : '1fr'),
+      ...b
+    }));
+    return {
+      desktop: !this.state.narrow,
+      mobile: this.state.narrow,
+      showMobilePanel: this.state.narrow && this.state.mobileOpen,
+      toggleMobile: () => this.setState(s => ({ mobileOpen: !s.mobileOpen })),
+      mobileNav: [
+        { name: 'Home', href: './Servysis Landing.dc.html' },
+        { name: 'Productos', href: './Marca Template.dc.html' },
+        { name: 'Servicios', href: './Pagina de Servicio.dc.html' },
+        { name: 'Soluciones', href: './Pagina de Solucion.dc.html' }
+      ],
+      mailto: 'mailto:servysis@servysis.com?subject=Consulta%20-%20' + encodeURIComponent(p.heroTitle || 'Solución'),
+      kicker: p.kicker ?? 'Automatización',
+      heroTitle: p.heroTitle ?? 'Automatización flexible para la intralogística',
+      heroImg: p.heroImg || 'https://www.servysis.com/wp-content/uploads/elementor/thumbs/STILL_Hauptbuehne_Mietfahrzeuge_Einsatz_3840x1400-ozv21ck6m0j8ajv9bvc2hvaqv3lyhfmo846fehlf40.jpg',
+      intro: p.intro || 'Los vehículos o las instalaciones de funcionamiento autónomo se utilizan en la intralogística desde hace mucho tiempo. Sin embargo, la creciente digitalización de los procesos comerciales confiere un nuevo dinamismo a la automatización: los sistemas automatizados pueden integrarse de forma fluida al proceso de TI, potenciando así la eficiencia.',
+      blocks
+    };
+  }
+}
+</script>
+</body>
+</html>
